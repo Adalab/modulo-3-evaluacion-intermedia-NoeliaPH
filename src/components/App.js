@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import adalabers from "../data/data.json";
 import "../styles/App.scss";
+import callToApi from '..//services/fetch.js';
 
 function App() {
+
+  useEffect (() =>{
+    callToApi()
+    .then(adalabers =>{
+      setData(adalabers.results);
+    });
+  }, []);
 
   /*const adalabers(){
     function getAdalabers(){
@@ -16,7 +24,7 @@ function App() {
     getAdalabers: getAdalabers
   };*/
 
-  const [data, setData]=useState(adalabers);
+  const [data, setData]=useState([]);
   const [name, setName]= useState('');
   const [counselor, setCounselor]= useState('');
   const [speciality, setSpeciality]= useState('');
